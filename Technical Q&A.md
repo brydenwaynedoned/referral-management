@@ -65,3 +65,11 @@
 **Answer:**
 
 > “I’d start by aligning naming conventions, event semantics, and admin documentation across the org — because clarity compounds faster than features.”
+
+---
+
+### Q8: *“Does this solution require Salesforce Health Cloud or any specialized licensing?*“
+
+**Answer:**
+
+> “No. This solution is intentionally built using standard Salesforce Platform capabilities only. It does not require Health Cloud, Service Cloud, OmniStudio, MuleSoft, or additional healthcare-specific licenses. All functionality is supported by core Salesforce features such as custom objects, record-triggered flows, Apex, and Lightning Web Components. This design choice minimizes licensing risk, avoids procurement complexity, and allows the architecture to be deployed or evaluated in enterprise healthcare orgs regardless of cloud strategy. If Health Cloud or integrations are introduced later, they can be layered on without refactoring the core design.“

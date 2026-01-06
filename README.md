@@ -554,7 +554,192 @@ Each layer was designed to be understandable by its primary audience.
 
 ---
 
-## 15. Closing Note
+Absolutely. Below is a **polished, production-ready section** you can drop directly into your README as **Section 15: Platform & Licensing Assumptions**.
+
+It is written to:
+
+* Reduce procurement and licensing anxiety
+* Signal architectural restraint
+* Be readable by admins, technical leads, and leadership
+* Reinforce that this solution is **platform-clean and healthcare-realistic**
+
+---
+
+## 15. Platform & Licensing Assumptions
+
+This reference implementation was intentionally designed to minimize licensing dependencies and avoid assumptions that could introduce procurement, governance, or operational friction in an enterprise healthcare environment.
+
+The goal of this section is to make **all platform expectations explicit**, so administrators, technical leads, and leadership can quickly assess feasibility and risk.
+
+---
+
+### 15.1 Salesforce Cloud Assumptions
+
+This solution assumes **Salesforce Platform (Core CRM)** capabilities only.
+
+**Required**
+
+* Salesforce Platform (Enterprise Edition or higher)
+* Standard support for:
+
+  * Custom objects and fields
+  * Record-Triggered Flows
+  * Apex (triggers and classes)
+  * Lightning Web Components
+  * Permission Sets and Sharing Rules
+
+**Not Required**
+
+* Salesforce Health Cloud
+* Salesforce Service Cloud
+* Salesforce Sales Cloud
+
+> This design is intentionally **cloud-agnostic within Salesforce**, allowing it to be deployed in healthcare orgs regardless of cloud strategy.
+
+---
+
+### 15.2 User License Assumptions
+
+#### Administrators & Developers
+
+The following licenses are sufficient:
+
+* Salesforce Administrator
+* Salesforce Platform User (with Apex + Flow access)
+
+Admins are expected to:
+
+* Maintain Flow logic
+* Adjust validation and routing rules
+* Manage permission sets
+* Support operational users
+
+---
+
+#### Operational / Faculty Practice Group Users
+
+The following licenses are sufficient:
+
+* Salesforce Platform User
+* Standard Salesforce User (with restricted permissions)
+
+Operational users are assumed to have:
+
+* Read/write access to Referral__c
+* Read-only visibility into referral history (via LWC)
+* No access to modify automation or configuration
+
+---
+
+### 15.3 Automation & Tooling Assumptions
+
+**Flows**
+
+* Record-Triggered Flows (After Save)
+* Subflows
+* Fault paths and decision logic
+
+No advanced orchestration tools are required:
+
+* No Flow Orchestrator
+* No OmniStudio
+* No external workflow engines
+
+---
+
+**Apex**
+
+* One trigger per object
+* Service-layer pattern
+* Bulk-safe SOQL and DML
+* `with sharing` enforced
+
+No advanced Apex features are required:
+
+* No Queueables
+* No Platform Events
+* No CDC dependencies
+
+---
+
+**Lightning Web Components**
+
+* Standard LWC framework
+* Read-only UI for operational visibility
+* Apex-backed data retrieval only
+
+No assumptions are made regarding:
+
+* Experience Cloud
+* External JavaScript frameworks
+* Third-party UI libraries
+
+---
+
+### 15.4 Data & Reporting Assumptions
+
+The solution uses two custom objects:
+
+* `Referral__c` (current state)
+* `Referral_Event__c` (history and audit trail)
+
+These objects are designed to work with:
+
+* Standard Salesforce Reports
+* Dashboards
+* List Views
+
+No external BI tools or analytics platforms are required.
+
+---
+
+### 15.5 Security & Compliance Assumptions
+
+The security model assumes:
+
+* Custom Permission Sets
+* Field-Level Security
+* Standard record sharing
+* Apex declared `with sharing`
+
+The following are **not required dependencies**:
+
+* Salesforce Shield
+* Platform Encryption
+* Event Monitoring
+
+> These capabilities can be layered on later without architectural refactoring.
+
+---
+
+### 15.6 Explicit Non-Assumptions
+
+This solution intentionally does **not** assume:
+
+* Salesforce Health Cloud licensing
+* Epic or EHR system integration
+* MuleSoft or middleware tooling
+* External data sources
+* Storage of PHI or patient records
+
+The architecture is **integration-ready but not integration-dependent**.
+
+---
+
+### 15.7 Architectural Intent
+
+These platform and licensing decisions were made to ensure that:
+
+* The solution can be evaluated quickly
+* Adoption does not require new licensing conversations
+* Admins and ops teams can own the system long-term
+* Technical complexity is proportional to actual need
+
+> *A solution that is easy to approve is easier to sustain.*
+
+---
+
+## 16. Closing Note
 
 This implementation is **representative, not exhaustive**.
 
