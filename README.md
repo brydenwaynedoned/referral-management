@@ -1,4 +1,5 @@
 ### Faculty Practice Group Referral Intake & Exception Management
+*(Version 2.3)*
 
 **Salesforce Reference Implementation**
 
